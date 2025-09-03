@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Kelas Marketing",
+    "description": "Belajar menjual pena",
+    "image": "1.jpg",
+    "price": 50000,
+    "study_field": "Marketing",
+    "duration": 360,
+    "rate": {
+      "amount": 25,
+      "value": 5
+    },
+    "tutor": {
+      "tutor_id": 123,
+      "avatar": "1.png",
+      "name": "Budiman",
+      "role": "Manager IT",
+      "work_place": "Gojek"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Kelas Desain",
+    "description": "Desain dari hati",
+    "image": "2.jpg",
+    "price": 50000,
+    "study_field": "Design",
+    "duration": 360,
+    "rate": {
+      "amount": 25,
+      "value": 5
+    },
+    "tutor": {
+      "tutor_id": 123,
+      "avatar": "2.png",
+      "name": "Budiman",
+      "role": "Manager IT",
+      "work_place": "Gojek"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Kelas Bangkit",
+    "description": "Bangkit Bangkit Bangkit",
+    "image": "3.jpg",
+    "price": 50000,
+    "study_field": "Improvement Character",
+    "duration": 360,
+    "rate": {
+      "amount": 25,
+      "value": 5
+    },
+    "tutor": {
+      "tutor_id": 123,
+      "avatar": "3.png",
+      "name": "Budiman",
+      "role": "Manager IT",
+      "work_place": "Gojek"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Kelas Fullstack",
+    "description": "Membuat website tercanggih",
+    "image": "4.jpg",
+    "price": 75000,
+    "study_field": "IT",
+    "duration": 360,
+    "rate": {
+      "amount": 25,
+      "value": 5
+    },
+    "tutor": {
+      "tutor_id": 123,
+      "avatar": "3.png",
+      "name": "Budiman",
+      "role": "Manager IT",
+      "work_place": "Gojek"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Kelas Musik",
+    "description": "Menyanyi dan bernyanyi",
+    "image": "5.jpg",
+    "price": 50000,
+    "study_field": "Art",
+    "duration": 360,
+    "rate": {
+      "amount": 25,
+      "value": 5
+    },
+    "tutor": {
+      "tutor_id": 123,
+      "avatar": "3.png",
+      "name": "Budiman",
+      "role": "Manager IT",
+      "work_place": "Gojek"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Kelas Backend",
+    "description": "Ngurusin logika website",
+    "image": "6.jpg",
+    "price": 50000,
+    "study_field": "IT",
+    "duration": 360,
+    "rate": {
+      "amount": 25,
+      "value": 5
+    },
+    "tutor": {
+      "tutor_id": 123,
+      "avatar": "3.png",
+      "name": "Budiman",
+      "role": "Manager IT",
+      "work_place": "Gojek"
+    }
+  }
+]

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-lato: 'Lato', 'sans-serif';
+  --font-poppins: 'Poppins', 'sans-serif';
+
+  --color-primary: rgba(62, 207, 76, 1);
+  --color-primary-400: rgba(107, 226, 107, 1);
+  --color-primary-300: rgba(148, 240, 139, 1);
+  --color-primary-200: rgba(192, 250, 180, 1);
+  --color-primary-100: rgba(226, 252, 217, 0.8);
+
+  --color-secondary: rgba(255, 189, 58, 1);
+  --color-secondary-400: rgba(255, 210, 107, 1);
+  --color-secondary-300: rgba(255, 223, 136, 1);
+  --color-secondary-200: rgba(255, 236, 176, 1);
+  --color-secondary-100: rgba(255, 247, 215, 0.8);
+
+  --color-tertiary: rgba(246, 73, 32, 1);
+  --color-tertiary-400: rgba(249, 130, 86, 1);
+  --color-tertiary-300: rgba(252, 165, 120, 1);
+  --color-tertiary-200: rgba(254, 202, 165, 1);
+  --color-tertiary-100: rgba(254, 232, 210, 0.8);
+
+  --color-dark-primary: #222325;
+  --color-dark-secondary: rgba(74, 80, 92, 1);
+  --color-dark-disabled: #3A354161;
+
+  --color-light-primary: #FFFFFF;
+  --color-light-secondary: #C1C2C4;
+  --color-light-disabled: #9D9EA1;
+
+  --color-other-primary: rgba(255, 255, 255, 1);
+  --color-other-base-background: rgba(244, 245, 250, 1);
+  --color-other-secondary-background: rgba(249, 250, 252, 1);
+  --color-other-border: rgba(58, 53, 65, 0.12);
+
+  --color-info-pressed: rgba(4, 74, 162, 1);
+  --color-info-hover: rgba(6, 99, 194, 1);
+  --color-info-default: rgba(9, 128, 226, 1);
+  --color-info-background: rgba(235, 249, 254, 1);
+
+  --color-success-pressed: rgba(28, 150, 117, 1);
+  --color-success-hover: rgba(40, 179, 128, 1);
+  --color-success-default: rgba(56, 209, 137, 1);
+  --color-success-background: rgba(224, 253, 223, 1);
+
+  --color-warning-pressed: rgba(181, 164, 13, 1);
+  --color-warning-hover: rgba(216, 198, 19, 1);
+  --color-warning-default: rgba(252, 233, 27, 1);
+  --color-warning-background: rgba(252, 248, 202, 1);
+
+  --color-error-pressed: rgba(183, 35, 21, 1);
+  --color-error-hover: rgba(219, 61, 31, 1);
+  --color-error-default: rgba(255, 92, 43, 1);
+  --color-error-background: rgba(252, 227, 209, 1);
+
+  --color-greyscale-900: rgba(33, 33, 33, 1);
+  --color-greyscale-800: rgba(66, 66, 66, 1);
+  --color-greyscale-700: rgba(97, 97, 97, 1);
+  --color-greyscale-600: rgba(117, 117, 117, 1);
+  --color-greyscale-500: rgba(158, 158, 158, 1);
+  --color-greyscale-400: rgba(189, 189, 189, 1);
+  --color-greyscale-300: rgba(224, 224, 224, 1);
+  --color-greyscale-200: rgba(238, 238, 238, 1);
+  --color-greyscale-100: rgba(245, 245, 245, 1);
+  --color-greyscale-50: rgba(250, 250, 250, 1);
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
