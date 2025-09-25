@@ -1,122 +1,322 @@
 [
   {
     "id": 1,
-    "name": "Kelas Marketing",
-    "description": "Belajar menjual pena",
+    "name": "Kelas Digital Marketing",
+    "description": "Pelajari strategi marketing online untuk meningkatkan penjualan.",
     "image": "1.jpg",
-    "price": 50000,
+    "price": 75000,
     "study_field": "Marketing",
-    "duration": 360,
+    "duration": 420,
     "rate": {
-      "amount": 25,
-      "value": 5
+      "amount": 58,
+      "value": 4.8
     },
     "tutor": {
-      "tutor_id": 123,
+      "tutor_id": 101,
       "avatar": "1.png",
-      "name": "Budiman",
-      "role": "Manager IT",
-      "work_place": "Gojek"
+      "name": "Andi Pratama",
+      "role": "Digital Strategist",
+      "work_place": "Tokopedia"
     }
   },
   {
     "id": 2,
-    "name": "Kelas Desain",
-    "description": "Desain dari hati",
-    "image": "2.jpg",
-    "price": 50000,
+    "name": "Kelas UI/UX Design",
+    "description": "Belajar mendesain aplikasi dengan pengalaman pengguna terbaik.",
+    "image": "8.jpg",
+    "price": 85000,
     "study_field": "Design",
-    "duration": 360,
+    "duration": 540,
     "rate": {
-      "amount": 25,
-      "value": 5
+      "amount": 72,
+      "value": 4.9
     },
     "tutor": {
-      "tutor_id": 123,
-      "avatar": "2.png",
-      "name": "Budiman",
-      "role": "Manager IT",
+      "tutor_id": 102,
+      "avatar": "1.png",
+      "name": "Siti Lestari",
+      "role": "UX Designer",
       "work_place": "Gojek"
     }
   },
   {
     "id": 3,
-    "name": "Kelas Bangkit",
-    "description": "Bangkit Bangkit Bangkit",
+    "name": "Kelas Public Speaking",
+    "description": "Bangun kepercayaan diri dan kemampuan berbicara di depan umum.",
     "image": "3.jpg",
-    "price": 50000,
-    "study_field": "Improvement Character",
-    "duration": 360,
+    "price": 60000,
+    "study_field": "Personal Development",
+    "duration": 300,
     "rate": {
-      "amount": 25,
-      "value": 5
+      "amount": 44,
+      "value": 4.6
     },
     "tutor": {
-      "tutor_id": 123,
-      "avatar": "3.png",
-      "name": "Budiman",
-      "role": "Manager IT",
-      "work_place": "Gojek"
+      "tutor_id": 103,
+      "avatar": "1.png",
+      "name": "Rizky Maulana",
+      "role": "Motivator",
+      "work_place": "Independent Speaker"
     }
   },
   {
     "id": 4,
-    "name": "Kelas Fullstack",
-    "description": "Membuat website tercanggih",
-    "image": "4.jpg",
-    "price": 75000,
+    "name": "Kelas Fullstack Web Development",
+    "description": "Pelajari frontend dan backend untuk jadi web developer handal.",
+    "image": "8.jpg",
+    "price": 120000,
     "study_field": "IT",
-    "duration": 360,
+    "duration": 720,
     "rate": {
-      "amount": 25,
+      "amount": 89,
       "value": 5
     },
     "tutor": {
-      "tutor_id": 123,
-      "avatar": "3.png",
-      "name": "Budiman",
-      "role": "Manager IT",
-      "work_place": "Gojek"
+      "tutor_id": 104,
+      "avatar": "1.png",
+      "name": "Dewi Anggraeni",
+      "role": "Software Engineer",
+      "work_place": "Bukalapak"
     }
   },
   {
     "id": 5,
-    "name": "Kelas Musik",
-    "description": "Menyanyi dan bernyanyi",
+    "name": "Kelas Vokal & Musik",
+    "description": "Asah kemampuan bernyanyi dengan teknik vokal profesional.",
     "image": "5.jpg",
     "price": 50000,
     "study_field": "Art",
     "duration": 360,
     "rate": {
-      "amount": 25,
-      "value": 5
+      "amount": 30,
+      "value": 4.5
     },
     "tutor": {
-      "tutor_id": 123,
-      "avatar": "3.png",
-      "name": "Budiman",
-      "role": "Manager IT",
-      "work_place": "Gojek"
+      "tutor_id": 105,
+      "avatar": "1.png",
+      "name": "Maya Putri",
+      "role": "Vocal Coach",
+      "work_place": "Musikindo"
     }
   },
   {
     "id": 6,
-    "name": "Kelas Backend",
-    "description": "Ngurusin logika website",
-    "image": "6.jpg",
-    "price": 50000,
+    "name": "Kelas Backend Development",
+    "description": "Belajar membangun API dan logika server-side.",
+    "image": "1.jpg",
+    "price": 95000,
     "study_field": "IT",
+    "duration": 480,
+    "rate": {
+      "amount": 61,
+      "value": 4.7
+    },
+    "tutor": {
+      "tutor_id": 106,
+      "avatar": "1.png",
+      "name": "Budi Hartono",
+      "role": "Backend Engineer",
+      "work_place": "Shopee"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Kelas Data Science",
+    "description": "Analisis data menggunakan Python dan machine learning.",
+    "image": "2.jpg",
+    "price": 130000,
+    "study_field": "Data",
+    "duration": 800,
+    "rate": {
+      "amount": 102,
+      "value": 4.9
+    },
+    "tutor": {
+      "tutor_id": 107,
+      "avatar": "1.png",
+      "name": "Kevin Setiawan",
+      "role": "Data Scientist",
+      "work_place": "Traveloka"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Kelas Fotografi Digital",
+    "description": "Belajar teknik dasar hingga advanced fotografi.",
+    "image": "4.jpg",
+    "price": 70000,
+    "study_field": "Photography",
     "duration": 360,
     "rate": {
-      "amount": 25,
+      "amount": 47,
+      "value": 4.6
+    },
+    "tutor": {
+      "tutor_id": 108,
+      "avatar": "1.png",
+      "name": "Rahmawati",
+      "role": "Photographer",
+      "work_place": "Freelance"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Kelas Mobile App Development",
+    "description": "Membangun aplikasi Android & iOS dengan React Native.",
+    "image": "8.jpg",
+    "price": 110000,
+    "study_field": "IT",
+    "duration": 600,
+    "rate": {
+      "amount": 73,
+      "value": 4.8
+    },
+    "tutor": {
+      "tutor_id": 109,
+      "avatar": "1.png",
+      "name": "Agus Salim",
+      "role": "Mobile Developer",
+      "work_place": "Grab"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Kelas Copywriting",
+    "description": "Tingkatkan kemampuan menulis untuk iklan dan pemasaran.",
+    "image": "7.jpg",
+    "price": 65000,
+    "study_field": "Marketing",
+    "duration": 330,
+    "rate": {
+      "amount": 34,
+      "value": 4.4
+    },
+    "tutor": {
+      "tutor_id": 110,
+      "avatar": "1.png",
+      "name": "Lina Marlina",
+      "role": "Content Writer",
+      "work_place": "Blibli"
+    }
+  },
+  {
+    "id": 11,
+    "name": "Kelas Bahasa Inggris",
+    "description": "Belajar bahasa Inggris dari dasar hingga mahir.",
+    "image": "6.jpg",
+    "price": 55000,
+    "study_field": "Language",
+    "duration": 400,
+    "rate": {
+      "amount": 56,
+      "value": 4.7
+    },
+    "tutor": {
+      "tutor_id": 111,
+      "avatar": "1.png",
+      "name": "Fajar Ananda",
+      "role": "Language Teacher",
+      "work_place": "EF"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Kelas Leadership",
+    "description": "Asah kemampuan memimpin tim dengan strategi yang tepat.",
+    "image": "5.jpg",
+    "price": 80000,
+    "study_field": "Management",
+    "duration": 360,
+    "rate": {
+      "amount": 48,
+      "value": 4.5
+    },
+    "tutor": {
+      "tutor_id": 112,
+      "avatar": "1.png",
+      "name": "Hendra Wijaya",
+      "role": "Team Leader",
+      "work_place": "Indosat"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Kelas Motion Graphics",
+    "description": "Belajar animasi dan motion design dengan After Effects.",
+    "image": "4.jpg",
+    "price": 90000,
+    "study_field": "Design",
+    "duration": 500,
+    "rate": {
+      "amount": 54,
+      "value": 4.6
+    },
+    "tutor": {
+      "tutor_id": 113,
+      "avatar": "1.png",
+      "name": "Yulia Rahman",
+      "role": "Animator",
+      "work_place": "Freelance"
+    }
+  },
+  {
+    "id": 14,
+    "name": "Kelas Financial Planning",
+    "description": "Kelola keuangan pribadi dengan cara yang efektif.",
+    "image": "3.jpg",
+    "price": 75000,
+    "study_field": "Finance",
+    "duration": 360,
+    "rate": {
+      "amount": 45,
+      "value": 4.7
+    },
+    "tutor": {
+      "tutor_id": 114,
+      "avatar": "1.png",
+      "name": "Arif Santoso",
+      "role": "Financial Advisor",
+      "work_place": "Mandiri"
+    }
+  },
+  {
+    "id": 15,
+    "name": "Kelas Entrepreneurship",
+    "description": "Bangun bisnis dari nol hingga sukses.",
+    "image": "2.jpg",
+    "price": 100000,
+    "study_field": "Business",
+    "duration": 600,
+    "rate": {
+      "amount": 83,
+      "value": 4.8
+    },
+    "tutor": {
+      "tutor_id": 115,
+      "avatar": "1.png",
+      "name": "Intan Wulandari",
+      "role": "Entrepreneur",
+      "work_place": "Startup Founder"
+    }
+  },
+  {
+    "id": 16,
+    "name": "Kelas Machine Learning",
+    "description": "Pelajari konsep dan implementasi machine learning modern.",
+    "image": "1.jpg",
+    "price": 140000,
+    "study_field": "Data",
+    "duration": 900,
+    "rate": {
+      "amount": 95,
       "value": 5
     },
     "tutor": {
-      "tutor_id": 123,
-      "avatar": "3.png",
-      "name": "Budiman",
-      "role": "Manager IT",
-      "work_place": "Gojek"
+      "tutor_id": 116,
+      "avatar": "1.png",
+      "name": "Bayu Saputra",
+      "role": "AI Engineer",
+      "work_place": "Google"
     }
   }
 ]

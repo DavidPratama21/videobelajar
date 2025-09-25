@@ -33,7 +33,7 @@ const RatingStars = ({
       onRatingChange(newRating);
     }
   };
-
+  // console.log(rating)
   return (
     <div
       className={`inline-flex items-center gap-1 ${

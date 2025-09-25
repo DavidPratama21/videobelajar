@@ -1,0 +1,70 @@
+[
+  {
+    "title": "Introduction t o Course 1: Foundations of User Experience Design",
+    "materials": [
+      {
+        "name": "The basics of user experience design",
+        "duration": 12
+      },
+      {
+        "name": "Jobs in the field of user experience",
+        "duration": 11
+      },
+      {
+        "name": "The product development life cycle",
+        "duration": 13
+      }
+    ]
+  },
+  {
+    "title": "Universal design, inclusive design, and equity-focused design",
+    "materials": [
+      {
+        "name": "The basics of user experience design",
+        "duration": 12
+      },
+      {
+        "name": "Jobs in the field of user experience",
+        "duration": 11
+      },
+      {
+        "name": "The product development life cycle",
+        "duration": 13
+      }
+    ]
+  },
+  {
+    "title": "Introduction to design sprints",
+    "materials": [
+      {
+        "name": "The basics of user experience design",
+        "duration": 12
+      },
+      {
+        "name": "Jobs in the field of user experience",
+        "duration": 11
+      },
+      {
+        "name": "The product development life cycle",
+        "duration": 13
+      }
+    ]
+  },
+  {
+    "title": "Introduction to UX research",
+    "materials": [
+      {
+        "name": "The basics of user experience design",
+        "duration": 12
+      },
+      {
+        "name": "Jobs in the field of user experience",
+        "duration": 11
+      },
+      {
+        "name": "The product development life cycle",
+        "duration": 13
+      }
+    ]
+  }
+]

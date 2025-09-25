@@ -1,4 +1,5 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
+import type { ChangeEvent } from "react";
 import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
 
@@ -7,7 +8,7 @@ const Newsletter = () => {
 
   const handleSubscribe = async () => {
     if (!email) {
-      toast.error("Email mu apa atuh?");
+      toast.error("Isi dulu donk email 😊");
       return;
     }
     try {
@@ -19,9 +20,7 @@ const Newsletter = () => {
       setEmail("");
     } catch (error: unknown) {
       const err = error as AxiosError<{ error?: string }>;
-      toast.error(
-        "Gagal nih :" + (err.response?.data?.error || err.message)
-      );
+      toast.error("Gagal nih :" + (err.response?.data?.error || err.message));
     }
   };
 

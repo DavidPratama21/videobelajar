@@ -1,8 +1,8 @@
-import type { ReactElement } from "react";
+import type { ReactNode } from "react";
 import Header from "../components/organisems/Header";
 import Footer from "../components/organisems/Footer"
 
-const MainLayout = ({ children }: { children: ReactElement }) => {
+const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="bg-[#FFFDF3]">
       <Header />
