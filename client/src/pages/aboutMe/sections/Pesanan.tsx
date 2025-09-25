@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Pagination from "../../../components/molecules/Pagination";
 import Tabs from "../../../components/molecules/Tabs";
 import SortSearch from "../../../components/molecules/SortSearch";
 import CardPesanan from "../components/CardPesanan/CardPesanan";

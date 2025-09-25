@@ -1,7 +1,18 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const Pagination = ({ currentPage , onPageChange, itemPerPage, totalItems}) => {
+type PaginationProps = {
+  currentPage: number;
+  onPageChange: React.Dispatch<React.SetStateAction<number>>;
+  itemPerPage: number;
+  totalItems: number;
+};
 
+const Pagination = ({
+  currentPage,
+  onPageChange,
+  itemPerPage,
+  totalItems,
+}: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / itemPerPage);
 
   const goToPage = (page: number) => {

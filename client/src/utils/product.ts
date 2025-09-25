@@ -1,10 +1,10 @@
 // Mapping filter
-export const priceFilters = {
+export const priceFilters: Record<string, {min: number; max: number}> = {
   "0 - 500k": { min: 0, max: 500_000 },
   "500k - 1jt": { min: 500_000, max: 1_000_000 },
   "1jt ke atas": { min: 1_000_000, max: Infinity },
 };
-export const durationFilters = {
+export const durationFilters: Record<string, {min: number; max: number}> = {
   "5h": { min: 0, max: 300 },
   "5h - 8h": { min: 301, max: 480 },
   "8h+": { min: 481, max: Infinity },

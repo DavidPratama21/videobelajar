@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router";
 import RatingStars from "./RatingStars";
 import { rupiahFormat } from "../../utils/product";
@@ -30,8 +29,6 @@ const Card = ({
   work_place,
   to,
 }: CardProps) => {
-  const [interactiveRating, setInteractiveRating] = useState(0);
-
   return (
     <Link
       to={`/detail/${to}`}
@@ -69,7 +66,6 @@ const Card = ({
               <p className="font-medium text-dark-primary leading-[140%] tracking-[0.2px] text-sm md:text-base">
                 {tutor_name}
               </p>
-              {/* 4497 */}
               <div className="flex gap-1 md:text-sm">
                 <p className="text-xs font-normal text-dark-secondary leading-[140%] tracking-[0.2px] md:text-sm">
                   {tutor_role}
@@ -87,7 +83,6 @@ const Card = ({
       <div className="flex justify-between items-center">
         <RatingStars
           rating={rating}
-          onRatingChange={setInteractiveRating}
           displayOnly={true}
           amountRated={reviewers}
           // showText={false}

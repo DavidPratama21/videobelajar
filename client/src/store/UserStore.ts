@@ -33,7 +33,7 @@ interface UserState {
   register: (navigate?: (path: string) => void) => Promise<void>;
   logout: (navigate?: (path: string) => void) => void;
   updateProfile: (
-    id: number,
+    // id: number,
     onSuccess?: (user: User) => void
   ) => Promise<void>;
   setAvatarPreview: (file: File | null) => void;
@@ -92,8 +92,13 @@ export const userStore = create<UserState>((set, get) => ({
       toast.success("Login Success");
       resetForm();
       if (navigate) navigate("/");
-    } catch (e: any) {
-      toast.error(e.response?.data?.message || "Login gagal");
+    } catch (e: unknown) {
+      if (e instanceof Error && "response" in e) {
+        const err = e as { response?: { data?: { message?: string } } };
+        toast.error(err.response?.data?.message || "Login gagal");
+      } else {
+        toast.error("Login gagal");
+      }
     }
   },
 
@@ -136,8 +141,10 @@ export const userStore = create<UserState>((set, get) => ({
     if (navigate) navigate("/login");
   },
 
-  updateProfile: async (id, onSuccess) => {
-    const { name, email, phone, password, confirmPassword, token, user } =
+  updateProfile: async (onSuccess) => {
+    // updateProfile: async (id, onSuccess) => {
+    const { name, email, phone, password, confirmPassword, user } =
+      // const { name, email, phone, password, confirmPassword, token, user } =
       get();
 
     if (password && password !== confirmPassword) {
@@ -146,11 +153,11 @@ export const userStore = create<UserState>((set, get) => ({
     }
 
     try {
-      const { data } = await axios.put(
-        `${api_url}/users/${id}`,
-        { name, email, phone, password },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      // const { data } = await axios.put(
+      //   `${api_url}/users/${id}`,
+      //   { name, email, phone, password },
+      //   { headers: { Authorization: `Bearer ${token}` } }
+      // );
 
       const updatedUser: User = { ...user!, name, email, phone };
       localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -159,9 +166,14 @@ export const userStore = create<UserState>((set, get) => ({
       toast.success("Update Profile Success", { autoClose: 2500 });
 
       if (onSuccess) onSuccess(updatedUser);
-    } catch (e: any) {
-      if (e.response?.data?.message?.includes("email")) {
-        toast.error("Email sudah terdaftar!");
+    } catch (e: unknown) {
+      if (e && typeof e === "object" && "response" in e) {
+        const err = e as { response?: { data?: { message?: string } } };
+        if (err.response?.data?.message?.includes("email")) {
+          toast.error("Email sudah terdaftar!");
+        } else {
+          toast.error("Gagal mengupdate profil.");
+        }
       } else {
         toast.error("Gagal mengupdate profil.");
       }

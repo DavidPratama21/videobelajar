@@ -105,6 +105,7 @@ const Profil = () => {
               <Input
                 id="Phone"
                 // value={phone}
+                type="number"
                 // onChange={(e) => setField("phone", e.target.value)}
                 className="flex-1"
               >

@@ -1,5 +1,5 @@
 type TabsProps = {
-  TabsList?: string[];
+  TabsList: string[];
   activeTab: string;
   setActiveTab: (tab: string) => void;
 };

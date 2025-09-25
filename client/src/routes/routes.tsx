@@ -4,10 +4,10 @@ import PublicRoute from "./PublicRoute";
 import Login from "../features/auth/pages/Login";
 import Regist from "../features/auth/pages/Regist";
 import Payment from "../features/payment/Payment";
-import Home from "../pages/home/Home.tsx";
-import Category from "../pages/category/Category.tsx";
-import DetailProducts from "../pages/detailProducts/DetailProducts.tsx";
-import AboutMe from "../pages/aboutMe/AboutMe.tsx";
+import Home from "../pages/home/Home";
+import Category from "../pages/category/Category";
+import DetailProducts from "../pages/detailProducts/DetailProducts";
+import AboutMe from "../pages/aboutMe/AboutMe";
 import PembayaranBerhasil from "../features/payment/PembayaranBerhasil";
 
 export const router = createBrowserRouter([

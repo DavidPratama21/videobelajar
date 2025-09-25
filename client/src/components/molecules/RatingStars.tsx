@@ -3,7 +3,6 @@ import Star from "../atoms/Star";
 
 type RatingStarsProps = {
   rating?: number;
-  onRatingChange?: (newRating: number) => void;
   showText?: boolean;
   displayOnly?: boolean;
   amountRated: number;
@@ -11,7 +10,6 @@ type RatingStarsProps = {
 
 const RatingStars = ({
   rating = 0,
-  onRatingChange,
   showText = true,
   displayOnly = false,
   amountRated,
@@ -24,16 +22,6 @@ const RatingStars = ({
   useEffect(() => {
     setCurrentRating(Math.round(rating));
   }, [rating]);
-
-  const handleRating = (newRating: number) => {
-    if (displayOnly) return;
-
-    setCurrentRating(newRating);
-    if (onRatingChange) {
-      onRatingChange(newRating);
-    }
-  };
-  // console.log(rating)
   return (
     <div
       className={`inline-flex items-center gap-1 ${
@@ -51,7 +39,6 @@ const RatingStars = ({
             className={`cursor-pointer transition-all text-dark-secondary hover:transform hover:scale-110 text-base ${
               isSelected ? "text-warning-default" : ""
             } ${isHovered && !displayOnly ? "text-yellow-400" : ""}`}
-            onClick={() => handleRating(starValue)}
             onMouseEnter={() => !displayOnly && setHover(starValue)}
             onMouseLeave={() => !displayOnly && setHover(null)}
             aria-label={`${starValue} star${starValue !== 1 ? "s" : ""}`}

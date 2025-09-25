@@ -1,10 +1,10 @@
 interface InputProps {
   id: string;
   type: string;
-  value: string | number;
+  value?: string | number;
   children: string;
   className?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({
