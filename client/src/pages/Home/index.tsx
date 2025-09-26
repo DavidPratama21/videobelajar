@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import Hero from "./components/Hero";
-import NewsLetter from "./components/NewsLetter";
+import Newsletter from "./components/Newsletter";
 import Tabs from "../../components/molecules/Tabs";
 import Card from "../../components/molecules/Card";
 import { productStore } from "../../store/ProductStore";
@@ -64,7 +64,7 @@ const Home = () => {
           </div>
         </main>
 
-        <NewsLetter />
+        <Newsletter />
       </div>
     </MainLayout>
   );

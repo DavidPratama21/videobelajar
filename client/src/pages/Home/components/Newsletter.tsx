@@ -3,7 +3,7 @@ import type { ChangeEvent } from "react";
 import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
 
-const NewsLetter = () => {
+const Newsletter = () => {
   const [email, setEmail] = useState<string>("");
 
   const handleSubscribe = async () => {
@@ -71,4 +71,4 @@ const NewsLetter = () => {
   );
 };
 
-export default NewsLetter;
+export default Newsletter;
