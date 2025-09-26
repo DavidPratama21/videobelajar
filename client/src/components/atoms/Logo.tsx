@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import videoBelajar from "../../assets/images/Logo.webp";
+import videoBelajar from "../../assets/images/logo.webp";
 
 const Logo = () => {
     return (
