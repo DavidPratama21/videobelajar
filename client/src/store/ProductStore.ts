@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { buildQueryParams } from "../utils/product";
+// import { buildQueryParams } from "../utils/product";
+// import type { Product, Filters } from "../types";
 
 const api_url = import.meta.env.VITE_API_URL;
 
@@ -11,7 +12,7 @@ interface Tutor {
   name: string;
   role: string;
   avatar: string;
-  workPlace: string
+  workPlace: string;
 }
 
 export interface Product {
@@ -24,7 +25,7 @@ export interface Product {
   price: number;
   avgRating: number;
   totalReviewers: number;
-  tutors: Tutor[]
+  tutors: Tutor[];
 }
 
 interface FormData {
@@ -99,17 +100,21 @@ export const productStore = create<ProductState>((set, get) => ({
   fetchProducts: async () => {
     try {
       const token = localStorage.getItem("token");
-      const { filters } = get();
+      // const { filters } = get();
 
-      const params = buildQueryParams(filters);
+      // const params = buildQueryParams(filters);
 
       const response = await axios.get<Product[]>(`${api_url}/products`, {
-        params,
+        // params,
         headers: { Authorization: `Bearer ${token}` },
       });
       set({ products: response.data });
-    } catch (e: any) {
-      console.error("Error nya tu ini :", e.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Error nya tu ini :", err.message);
+      } else {
+        console.error("Unexpected error:", err);
+      }
     }
   },
   setProducts: (products) => set({ products }),
@@ -144,8 +149,12 @@ export const productStore = create<ProductState>((set, get) => ({
         },
       }));
       toast.success("Produk berhasil di tambahin");
-    } catch (e: any) {
-      console.error("Error nya tu ini :", e.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Error nya tu ini :", err.message);
+      } else {
+        console.error("Unexpected error:", err);
+      }
     }
   },
 
@@ -196,8 +205,12 @@ export const productStore = create<ProductState>((set, get) => ({
         },
       });
       alert("Produk berhasil diperbarui!");
-    } catch (err: any) {
-      console.error("Gagal update produk:", err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Gagal update produk :", err.message);
+      } else {
+        console.error("Unexpected error:", err);
+      }
     }
   },
 
@@ -224,9 +237,17 @@ export const productStore = create<ProductState>((set, get) => ({
         products: state.products.filter((p) => p.id !== id),
       }));
       toast.success("Sukses hapus produk");
-    } catch (e: any) {
-      toast.error("Gagal delete product:");
-      console.error("Errornya karena :", e.message);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.message || "Gagal delete product");
+        console.error("Axios error:", err.response?.data || err.message);
+      } else if (err instanceof Error) {
+        toast.error("Gagal delete product");
+        console.error("General error:", err.message);
+      } else {
+        toast.error("Gagal delete product (unexpected error)");
+        console.error("Unexpected error:", err);
+      }
     }
   },
 }));
