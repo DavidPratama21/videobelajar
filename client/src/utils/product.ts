@@ -1,10 +1,10 @@
 // Mapping filter
-export const priceFilters: Record<string, {min: number; max: number}> = {
+export const priceFilters: Record<string, { min: number; max: number }> = {
   "0 - 500k": { min: 0, max: 500_000 },
   "500k - 1jt": { min: 500_000, max: 1_000_000 },
   "1jt ke atas": { min: 1_000_000, max: Infinity },
 };
-export const durationFilters: Record<string, {min: number; max: number}> = {
+export const durationFilters: Record<string, { min: number; max: number }> = {
   "5h": { min: 0, max: 300 },
   "5h - 8h": { min: 301, max: 480 },
   "8h+": { min: 481, max: Infinity },
@@ -19,7 +19,14 @@ export const mapFilterToRange = (
 };
 
 // utils/product.ts
-export const buildQueryParams = (filters: Record<string, any>): string => {
+type Filter = {
+  studyField?: string;
+  search?: string;
+  price?: string;
+  duration?: string;
+  sort?: string;
+};
+export const buildQueryParams = (filters: Filter): string => {
   const params = new URLSearchParams();
 
   // studyField
@@ -53,23 +60,41 @@ export const buildQueryParams = (filters: Record<string, any>): string => {
   return params.toString();
 };
 
-export const filterProducts = (products: any[], filters: any) => {
+export type Product = {
+  id: number;
+  name: string;
+  studyField: string;
+  price: number;
+  duration: number; // dalam menit mungkin?
+};
+export type Filters = {
+  studyFields?: string[];
+  prices?: string[];
+  durations?: string[];
+};
+
+export const filterProducts = (
+  products: Product[],
+  filters: Filters
+): Product[] => {
   const noFilter =
     (!filters.studyFields || filters.studyFields.length === 0) &&
     (!filters.prices || filters.prices.length === 0) &&
     (!filters.durations || filters.durations.length === 0);
+
   if (noFilter) return products;
+
   return products.filter((product) => {
     let valid = true;
 
     // studyField (multi)
-    if (filters.studyFields?.length > 0) {
+    if (filters.studyFields?.length) {
       valid = valid && filters.studyFields.includes(product.studyField);
     }
 
     // price (multi)
-    if (filters.prices?.length > 0) {
-      const inPriceRange = filters.prices.some((price: string) => {
+    if (filters.prices?.length) {
+      const inPriceRange = filters.prices.some((price) => {
         const range = mapFilterToRange("price", price);
         return (
           range && product.price >= range.min && product.price <= range.max
@@ -79,8 +104,8 @@ export const filterProducts = (products: any[], filters: any) => {
     }
 
     // duration (multi)
-    if (filters.durations?.length > 0) {
-      const inDurationRange = filters.durations.some((duration: string) => {
+    if (filters.durations?.length) {
+      const inDurationRange = filters.durations.some((duration) => {
         const range = mapFilterToRange("duration", duration);
         return (
           range &&
