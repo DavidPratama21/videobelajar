@@ -5,6 +5,7 @@
     "dev": "npx nodemon ./src/server.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.58.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
@@ -15,6 +16,7 @@
     "mysql2": "^3.14.5",
     "nodemailer": "^7.0.6",
     "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
     "sharp": "^0.34.3",
     "uuid": "^11.1.0"
   }
