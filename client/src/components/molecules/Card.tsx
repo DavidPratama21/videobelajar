@@ -29,6 +29,7 @@ const Card = ({
   work_place,
   to,
 }: CardProps) => {
+  
   return (
     <Link
       to={`/detail/${to}`}

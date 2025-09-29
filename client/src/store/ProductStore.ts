@@ -2,56 +2,11 @@ import { create } from "zustand";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import { buildQueryParams } from "../utils/product";
-// import type { Product, Filters } from "../types";
+import type { Product, Filters, FormData } from "../types";
 
 const api_url = import.meta.env.VITE_API_URL;
 
 // ==== TIPE DATA ====
-interface Tutor {
-  id: number;
-  name: string;
-  role: string;
-  avatar: string;
-  workPlace: string;
-}
-
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  studyField: string;
-  duration: number;
-  price: number;
-  avgRating: number;
-  totalReviewers: number;
-  tutors: Tutor[];
-}
-
-interface FormData {
-  name: string;
-  description: string;
-  image: string;
-  studyField: string;
-  duration: number;
-  price: number;
-}
-
-export type Filters = {
-  studyFields: string[];
-  prices: string[];
-  durations: string[];
-};
-// interface Filters {
-//   search: string;
-//   studyField: string;
-//   minPrice: string;
-//   maxPrice: string;
-//   sort: string;
-//   price: string;
-//   duration: string;
-// }
-
 interface ProductState {
   products: Product[];
   formData: FormData;

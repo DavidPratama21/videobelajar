@@ -7,18 +7,15 @@ import Filters from "./components/Filters";
 import SortSearch from "../../components/molecules/SortSearch";
 import { productStore } from "../../store/ProductStore";
 import { filterProducts } from "../../utils/product";
+import type { Product } from "../../types";
 
 const Category = () => {
   const [searchParams] = useSearchParams();
   const [currentPage, setcurrentPage] = useState(1);
-  const { products, fetchProducts, filters, setFilters, search, sort } =
+  const { fetchProducts, filters, setFilters, search, sort } =
     productStore();
-  let filteredProducts =
-    filters.studyFields.length === 0 &&
-    filters.prices.length === 0 &&
-    filters.durations.length === 0
-      ? products
-      : filterProducts(products, filters);
+  const products = productStore((state) => state.products)
+  let filteredProducts = filterProducts(products as Product[], filters);
 
   if (search) {
     filteredProducts = filteredProducts.filter((p) =>
@@ -90,8 +87,8 @@ const Category = () => {
                   rating={product.avgRating ?? 0}
                   reviewers={product.totalReviewers ?? 0}
                   tutor_name={product.tutors?.[0]?.name ?? "Unknown"}
-                  tutor_role={product.tutors?.[0]?.role ?? "Unknown"}
-                  avatar={`/assets/images/tutors/${product.tutors?.[0]?.avatar ?? "default.png"}`}
+                  tutor_role={product.tutors?.[0]?.expertise ?? "Unknown"}
+                  avatar={`/assets/images/tutors/${product.tutors?.[0]?.photo ?? "default.png"}`}
                   work_place={product.tutors?.[0]?.workPlace ?? "Unknown"}
                 />
               ))}

@@ -23,6 +23,7 @@ const Home = () => {
     return product.studyField === activeTab;
   });
 
+  // console.log(filteredProducts)
   return (
     <MainLayout>
       <div className="grid py-7 md:py-16 px-5 md:px-30 gap-6 md:gap-16 mx-auto md:max-w-[1440px]">
@@ -56,8 +57,8 @@ const Home = () => {
                 rating={product.avgRating}
                 reviewers={product.totalReviewers}
                 tutor_name={product.tutors[0].name}
-                tutor_role={product.tutors[0].role}
-                avatar={`/assets/images/tutors/${product.tutors[0].avatar}`}
+                tutor_role={product.tutors[0].expertise}
+                avatar={`/assets/images/tutors/${product.tutors[0].photo}`}
                 work_place={product.tutors[0].workPlace}
               />
             ))}
