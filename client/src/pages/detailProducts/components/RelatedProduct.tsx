@@ -35,12 +35,12 @@ const RelatedProduct = ({ studyField, currentId }: RPProps) => {
               description={p.description}
               price={p.price}
               image={p.image}
-              rating={p.avgRating}
-              reviewers={p.totalReviewers}
-              tutor_name={p.tutors[0].name}
-              tutor_role={p.tutors[0].role}
-              avatar={`/assets/images/tutors/${p.tutors[0].avatar}`}
-              work_place={p.tutors[0].workPlace}
+              rating={p.avgRating ?? 0}
+              reviewers={p.totalReviewers ?? 0}
+              tutor_name={p.tutors?.[0]?.name ?? "Unknown"}
+              tutor_role={p.tutors?.[0]?.expertise ?? "Unknown"}
+              avatar={`/assets/images/tutors/${p.tutors?.[0]?.photo} ?? Unknown`}
+              work_place={p.tutors?.[0]?.workPlace ?? "Unknown"}
             />
           ))
         ) : (

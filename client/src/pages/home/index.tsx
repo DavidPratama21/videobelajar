@@ -54,12 +54,12 @@ const Home = () => {
                 description={product.description}
                 image={product.image}
                 price={product.price}
-                rating={product.avgRating}
-                reviewers={product.totalReviewers}
-                tutor_name={product.tutors[0].name}
-                tutor_role={product.tutors[0].expertise}
-                avatar={`/assets/images/tutors/${product.tutors[0].photo}`}
-                work_place={product.tutors[0].workPlace}
+                rating={product.avgRating || 0}
+                reviewers={product.totalReviewers || 0}
+                tutor_name={product.tutors?.[0]?.name ?? "Unknown"}
+                tutor_role={product.tutors?.[0]?.expertise ?? "Unknown"}
+                avatar={`/assets/images/tutors/${product.tutors?.[0]?.photo} ?? Unknown`}
+                work_place={product.tutors?.[0]?.workPlace ?? "Unknown"}
               />
             ))}
           </div>
