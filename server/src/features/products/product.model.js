@@ -1,117 +1,79 @@
-import { pool } from "../../config/database.js";
 import supabase from "../../config/supabaseClient.js";
 
-// export async function getProducts({
-//   search,
-//   sort,
-//   minPrice,
-//   maxPrice,
-//   studyField,
-// }) {
-//   let query = `
-//     SELECT
-//       p.id AS productid,
-//       p.name AS productname,
-//       p.description,
-//       p.price,
-//       p.image,
-//       p.studyfield,
-//       t.id AS tutorid,
-//       t.name AS tutorname,
-//       t.expertise AS tutorrole,
-//       t.photo AS tutorphoto,
-//       t.workplace AS tutorworkplace,
-//       COALESCE(ROUND(AVG(r.rating),2),0) AS avgrating,
-//       COALESCE(COUNT(r.id), 0) AS totalreviewers
-//     FROM products p
-//     LEFT JOIN product_tutor pt ON p.id = pt.product_id
-//     LEFT JOIN tutors t ON pt.tutor_id = t.id
-//     LEFT JOIN rates r ON p.id = r.product_id
-//     WHERE 1=1
-//     GROUP BY
-//     p.id, p.name, p.description, p.price, p.image, p.studyfield,
-//     t.id, t.name, t.expertise, t.photo, t.workplace;
-//   `;
-//   let values = [];
-//   if (search) {
-//     values.push(`%${search}%`, `%${search}%`);
-//     query += ` AND (p.name ILIKE $${
-//       values.length - 1
-//     } OR p.description ILIKE $${values.length})`;
-//   }
+export async function getProducts({
+  search,
+  sort,
+  minPrice,
+  maxPrice,
+  studyField,
+}) {
+  let query = supabase.from("products").select(`
+    id, name, description, price, image, studyfield,
+      tutors (id, name, expertise, photo, workplace),
+      rates (rating)
+    `);
 
-//   if (studyField) {
-//     values.push(studyField);
-//     query += ` AND p.studyfield = $${values.length}`;
-//   }
-//   if (minPrice) {
-//     values.push(Number(minPrice));
-//     query += ` AND p.price >= $${values.length}`;
-//   }
-//   if (maxPrice) {
-//     values.push(Number(maxPrice));
-//     query += ` AND p.price <= $${values.length}`;
-//   }
+  if (search) {
+    // query = query
+    //   .ilike("name", `%${search}%`)
+    //   .ilike("description", `%${search}%`);
+    // Note: Supabase `or` bisa dipakai kalau butuh kombinasi search
+    query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+  }
+  if (studyField) query = query.eq("studyfield", studyField);
+  if (minPrice) query = query.gte("price", Number(minPrice));
+  if (maxPrice) query = query.lte("price", Number(maxPrice));
 
-//   switch (sort) {
-//     case "name_asc":
-//       query += " ORDER BY p.name ASC";
-//       break;
-//     case "name_desc":
-//       query += " ORDER BY p.name DESC";
-//       break;
-//     case "price_asc":
-//       query += " ORDER BY p.price ASC";
-//       break;
-//     case "price_desc":
-//       query += " ORDER BY p.price DESC";
-//       break;
-//   }
+  // sorting
+  switch (sort) {
+    case "name_asc":
+      query = query.order("name", { ascending: true });
+      break;
+    case "name_desc":
+      query = query.order("name", { ascending: false });
+      break;
+    case "price_asc":
+      query = query.order("price", { ascending: true });
+      break;
+    case "price_desc":
+      query = query.order("price", { ascending: false });
+      break;
+  }
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
 
-//   // PostGres
-//   const result = await pool.query(query, values);
-//   const rows = result.rows;
-
-//   // NEW
-//   const productsMap = {};
-//   rows.forEach((row) => {
-//     if (!productsMap[row.productid]) {
-//       productsMap[row.productid] = {
-//         id: row.productid,
-//         name: row.productname,
-//         description: row.description,
-//         price: row.price,
-//         image: row.image,
-//         studyField: row.studyfield,
-//         avgRating: row.avgrating ? Number(row.avgrating) : 0,
-//         totalReviewers: row.totalreviewers ? Number(row.totalreviewers) : 0,
-//         tutors: [],
-//       };
-//     }
-//     if (row.tutorid) {
-//       console.log()
-//       productsMap[row.productid].tutors.push({
-//         id: row.tutorid,
-//         name: row.tutorname,
-//         expertise: row.tutorrole,
-//         photo: row.tutorphoto,
-//         workPlace: row.tutorworkplace,
-//       });
-//     }
-//   });
-
-//   return Object.values(productsMap);
-// }
-
-export async function getProducts ({search, sort, minPrice, maxPrice, studyField }){
-  let query = supabase.from("products")
+  // hitung avg rating + total reviewers
+  return data.map((p) => ({
+    ...p,
+    avgRating: p.rates?.length
+      ? p.rates.reduce((a, r) => a + r.rating, 0) / p.rates.length
+      : 0,
+    totalReviewers: p.rates?.length || 0,
+  }));
 }
 
 export async function getProduct(id) {
-  const result = await pool.query(`SELECT * FROM products WHERE id = $1`, [id]);
-  return result.rows[0];
-}
+  const { data, error } = await supabase
+    .from("products")
+    .select(
+      `
+      id, name, description, price, image, studyfield,
+      tutors (id, name, expertise, photo, workplace),
+      rates (rating)
+    `
+    )
+    .eq("id", id)
+    .single();
 
+  if (error) throw new Error(error.message);
+  return {
+    ...data,
+    avgRating: data.rates?.length
+      ? data.rates.reduce((a, r) => a + r.rating, 0) / data.rates.length
+      : 0,
+    totalReviewers: data.rates?.length || 0,
+  };
+}
 
 export async function createProduct({
   name,
@@ -121,28 +83,32 @@ export async function createProduct({
   duration,
   price,
 }) {
-  const query = `
-    INSERT INTO products (name, description, image, studyfield, duration, price) VALUES
-    ($1, $2, $3, $4, $5, $6)
-    RETURNING id
-  `;
-  const values = [name, description, image, studyField, duration, price];
-  const result = await pool.query(query, values);
-  const id = result.rows[0].id;
-  return getProduct(id);
+  const { data, error } = await supabase
+    .from("products")
+    .insert([
+      { name, description, image, studyfield: studyField, duration, price },
+    ])
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
 }
 
 export async function updateProduct(id, name, description, price) {
-  const query = `
-    UPDATE products
-    SET name = $1, description = $2, price = $3
-    WHERE id = $4
-  `;
-  await pool.query(query, [name, description, price, id]);
-  return getProduct(id);
+  const { data, error } = await supabase
+    .from("products")
+    .update({ name, description, price })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
 }
 
 export async function deleteProduct(id) {
-  const query = `DELETE FROM products WHERE id = $1`;
-  await pool.query(query, [id]);
+  const { error } = await supabase.from("products").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  return true;
 }
