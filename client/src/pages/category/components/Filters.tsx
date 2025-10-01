@@ -13,7 +13,7 @@ const Filters = () => {
   const { products, filters, setFilters, resetFilters } = productStore();
 
   const studyFields = Array.from(
-    new Set(products.map((product) => product.studyField))
+    new Set(products.map((product) => product.studyfield))
   );
 
   const toggleSubMenu = (key: keyof typeof openSubMenu) => {

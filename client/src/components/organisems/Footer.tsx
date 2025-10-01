@@ -18,7 +18,7 @@ const Footer = () => {
     fetchProducts();
   }, [fetchProducts]);
   const studyFields = Array.from(
-    new Set(products.map((product) => product.studyField))
+    new Set(products.map((product) => product.studyfield))
   );
   const Menus = [
     {

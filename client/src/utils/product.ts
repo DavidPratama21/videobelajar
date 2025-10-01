@@ -70,7 +70,7 @@ export const filterProducts = (products: Product[], filters: Filters) => {
 
     // studyField (multi)
     if (filters.studyFields?.length > 0) {
-      valid = valid && filters.studyFields.includes(product.studyField);
+      valid = valid && filters.studyFields.includes(product.studyfield);
     }
 
     // price (multi)

@@ -7,14 +7,7 @@ import PaymentProgress from "./components/PaymentProgress";
 import ProductCard from "./components/ProductCard";
 import PaymentTimer from "./components/PaymentTimer";
 import { productStore } from "../../store/ProductStore";
-
-type Product = {
-  id: number;
-  name: string;
-  image: string;
-  studyField: string;
-  price: number;
-};
+import type { Product } from "../../types";
 
 const Payment = () => {
   const location = useLocation();
@@ -28,7 +21,7 @@ const Payment = () => {
 
   useEffect(() => {
     if (products.length > 0 && id) {
-      const product = products.find((p) => p.id === Number(id));
+      const product = products.find((p) => p.productid === Number(id));
       setProduct(product ?? null);
     }
   }, [products, id]);
@@ -38,8 +31,8 @@ const Payment = () => {
     [`/metodePembayaran/${id}`]: {
       component: (
         <MetodePembayaran
-          id={product?.id ?? 0}
-          name={product?.name ?? ""}
+          id={product?.productid ?? 0}
+          name={product?.productname ?? ""}
           price={product?.price ?? 0}
         />
       ),
@@ -55,7 +48,7 @@ const Payment = () => {
       <div className="grid md:grid-cols-[1fr_1.5fr] py-7 md:py-16 px-5 md:px-30 gap-6 md:gap-9 md:max-w-[1440px] md:mx-auto">
         <PaymentProgress className="md:hidden" />
         <ProductCard
-          name={product?.name ?? ""}
+          name={product?.productname ?? ""}
           price={product?.price ?? 0}
           image={product?.image ?? ""}
         />

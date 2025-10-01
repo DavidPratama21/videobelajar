@@ -19,7 +19,7 @@ const Category = () => {
 
   if (search) {
     filteredProducts = filteredProducts.filter((p) =>
-      p.name.toLowerCase().includes(search.toLowerCase())
+      p.productname.toLowerCase().includes(search.toLowerCase())
     );
   }
 
@@ -31,12 +31,12 @@ const Category = () => {
   }
   if (sort === "A to Z") {
     filteredProducts = [...filteredProducts].sort((a, b) =>
-      a.name.localeCompare(b.name)
+      a.productname.localeCompare(b.productname)
     );
   }
   if (sort === "Z to A") {
     filteredProducts = [...filteredProducts].sort((a, b) =>
-      b.name.localeCompare(a.name)
+      b.productname.localeCompare(a.productname)
     );
   }
 
@@ -78,18 +78,18 @@ const Category = () => {
             <div className="grid sm:justify-start gap-5 sm:gap-y-8 sm:gap-x-6 lg:grid-cols-2 sm:w-fit">
               {currentProducts.map((product) => (
                 <Card
-                  key={product.id}
-                  to={product.id}
-                  name={product.name}
+                  key={product.productid}
+                  to={product.productid}
+                  name={product.productname}
                   description={product.description}
                   image={product.image}
                   price={product.price}
-                  rating={product.avgRating ?? 0}
-                  reviewers={product.totalReviewers ?? 0}
-                  tutor_name={product.tutors?.[0]?.name ?? "Unknown"}
-                  tutor_role={product.tutors?.[0]?.expertise ?? "Unknown"}
-                  avatar={`/assets/images/tutors/${product.tutors?.[0]?.photo ?? "default.png"}`}
-                  work_place={product.tutors?.[0]?.workPlace ?? "Unknown"}
+                  rating={product.avgrating ?? 0}
+                  reviewers={product.totalreviewers ?? 0}
+                  tutor_name={product.tutors?.[0]?.tutorname ?? "Unknown"}
+                  tutor_role={product.tutors?.[0]?.tutorrole ?? "Unknown"}
+                  avatar={`/assets/images/tutors/${product.tutors?.[0]?.tutorphoto ?? "default.png"}`}
+                  work_place={product.tutors?.[0]?.tutorworkplace ?? "Unknown"}
                 />
               ))}
             </div>
