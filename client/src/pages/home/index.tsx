@@ -23,7 +23,7 @@ const Home = () => {
     return product.studyField === activeTab;
   });
 
-  // console.log(filteredProducts)
+  console.log(filteredProducts)
   return (
     <MainLayout>
       <div className="grid py-7 md:py-16 px-5 md:px-30 gap-6 md:gap-16 mx-auto md:max-w-[1440px]">
