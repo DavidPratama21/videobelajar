@@ -10,7 +10,7 @@ const RelatedProduct = ({ studyField, currentId }: RPProps) => {
   const { products } = productStore();
 
   const RelatedProducts = products.filter(
-    (p) => p.studyField === studyField && p.id !== currentId
+    (p) => p.studyfield === studyField && p.productid !== currentId
   );
 
   return (
@@ -29,18 +29,18 @@ const RelatedProduct = ({ studyField, currentId }: RPProps) => {
         {RelatedProducts.length > 0 ? (
           RelatedProducts.map((p) => (
             <Card
-              key={p.id}
-              to={p.id}
-              name={p.name}
+              key={p.productid}
+              to={p.productid}
+              name={p.productname}
               description={p.description}
               price={p.price}
               image={p.image}
-              rating={p.avgRating ?? 0}
-              reviewers={p.totalReviewers ?? 0}
-              tutor_name={p.tutors?.[0]?.name ?? "Unknown"}
-              tutor_role={p.tutors?.[0]?.expertise ?? "Unknown"}
-              avatar={`/assets/images/tutors/${p.tutors?.[0]?.photo} ?? Unknown`}
-              work_place={p.tutors?.[0]?.workPlace ?? "Unknown"}
+              rating={p.avgrating ?? 0}
+              reviewers={p.totalreviewers ?? 0}
+              tutor_name={p.tutors?.[0]?.tutorname ?? "Unknown"}
+              tutor_role={p.tutors?.[0]?.tutorrole ?? "Unknown"}
+              avatar={`/assets/images/tutors/${p.tutors?.[0]?.tutorphoto} ?? Unknown`}
+              work_place={p.tutors?.[0]?.tutorworkplace ?? "Unknown"}
             />
           ))
         ) : (

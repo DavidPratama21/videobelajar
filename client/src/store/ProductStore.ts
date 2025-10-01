@@ -124,10 +124,10 @@ export const productStore = create<ProductState>((set, get) => ({
     set({
       productEdit: product,
       formData: {
-        name: product.name,
+        name: product.productname,
         description: product.description,
         image: product.image,
-        studyField: product.studyField,
+        studyField: product.studyfield,
         duration: product.duration,
         price: product.price,
       },
@@ -146,7 +146,7 @@ export const productStore = create<ProductState>((set, get) => ({
     }
 
     try {
-      await axios.put(`${api_url}/products/${productEdit.id}`, formData);
+      await axios.put(`${api_url}/products/${productEdit.productid}`, formData);
       await fetchProducts();
       set({
         productEdit: null,
@@ -189,7 +189,7 @@ export const productStore = create<ProductState>((set, get) => ({
     try {
       await axios.delete(`${api_url}/products/${id}`);
       set((state) => ({
-        products: state.products.filter((p) => p.id !== id),
+        products: state.products.filter((p) => p.productid !== id),
       }));
       toast.success("Sukses hapus produk");
     } catch (err: unknown) {

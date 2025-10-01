@@ -1,22 +1,22 @@
 // types.ts
 export interface Tutor {
-  id: number;
-  name: string;
-  expertise: string;
-  photo: string;
-  workPlace: string;
+  tutorid: number;
+  tutorname: string;
+  tutorrole: string;
+  tutorphoto: string;
+  tutorworkplace: string;
 }
 
 export interface Product {
-  id: number;
-  name: string;
+  productid: number;
+  productname: string;
   description: string;
   image: string;
-  studyField: string;
+  studyfield: string;
   duration: number;
   price: number;
-  avgRating?: number;
-  totalReviewers?: number;
+  avgrating?: number;
+  totalreviewers?: number;
   tutors?: Tutor[];
 }
 

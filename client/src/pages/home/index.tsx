@@ -14,13 +14,13 @@ const Home = () => {
   }, [fetchProducts]);
 
   const studyFields = Array.from(
-    new Set(products.map((product) => product.studyField))
+    new Set(products.map((product) => product.studyfield))
   );
   const TabsList = ["All Class", ...studyFields];
 
   const filteredProducts = products.filter((product) => {
     if (activeTab === "All Class") return true;
-    return product.studyField === activeTab;
+    return product.studyfield === activeTab;
   });
 
   console.log(filteredProducts)
@@ -48,18 +48,18 @@ const Home = () => {
           <div className="grid sm:grid-cols-2 md:justify-center md:flex md:flex-row md:flex-wrap mx-auto md:mx-0 gap-5 md:gap-x-6 md:gap-y-8">
             {filteredProducts.map((product) => (
               <Card
-                key={product.id}
-                to={product.id}
-                name={product.name}
+                key={product.productid}
+                to={product.productid}
+                name={product.productname}
                 description={product.description}
                 image={product.image}
                 price={product.price}
-                rating={product.avgRating || 0}
-                reviewers={product.totalReviewers || 0}
-                tutor_name={product.tutors?.[0]?.name ?? "Unknown"}
-                tutor_role={product.tutors?.[0]?.expertise ?? "Unknown"}
-                avatar={`/assets/images/tutors/${product.tutors?.[0]?.photo} ?? Unknown`}
-                work_place={product.tutors?.[0]?.workPlace ?? "Unknown"}
+                rating={product.avgrating || 0}
+                reviewers={product.totalreviewers || 0}
+                tutor_name={product.tutors?.[0]?.tutorname ?? "Unknown"}
+                tutor_role={product.tutors?.[0]?.tutorrole ?? "Unknown"}
+                avatar={`/assets/images/tutors/${product.tutors?.[0]?.tutorphoto} ?? Unknown`}
+                work_place={product.tutors?.[0]?.tutorworkplace ?? "Unknown"}
               />
             ))}
           </div>

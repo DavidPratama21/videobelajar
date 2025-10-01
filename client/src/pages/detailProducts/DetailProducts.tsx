@@ -10,20 +10,13 @@ import Curriculum from "./components/Curriculum";
 import RatingAndReview from "./components/RatingAndReview";
 import RelatedProduct from "./components/RelatedProduct";
 import { productStore } from "../../store/ProductStore";
+import type { Product } from "../../types";
 
-type Product = {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  studyField: string;
-  price: number;
-};
 
 const DetailProducts = () => {
   const { id } = useParams();
   const { products, fetchProducts } = productStore();
-  const [product, setProduct] = useState<Product | null | undefined>(null);
+  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     fetchProducts();
@@ -31,7 +24,7 @@ const DetailProducts = () => {
 
   useEffect(() => {
     if (products.length > 0 && id) {
-      const product = products.find((p) => p.id === Number(id));
+      const product = products.find((p) => p.productid === Number(id));
       setProduct(product ?? null);
     }
   }, [products, id]);
@@ -39,14 +32,14 @@ const DetailProducts = () => {
     <MainLayout>
       <div className="md:max-w-[1440px] grid py-7 md:py-16 px-5 md:px-30 gap-6 md:gap-9 mx-auto">
         {product && (
-          <Breadcrumbs product={product.name} studyField={product.studyField} />
+          <Breadcrumbs product={product.productname} studyField={product.studyfield} />
         )}
-        <Hero name={product?.name ?? ""} image={product?.image ?? ""} />
+        <Hero name={product?.productname ?? ""} image={product?.image ?? ""} />
         <div className="grid md:flex gap-6 md:gap-9">
           <DetailInfo
-            name={product?.name ?? ""}
+            name={product?.productname ?? ""}
             price={product?.price ?? 0}
-            id={product?.id ?? 0}
+            id={product?.productid ?? 0}
           />
           <div className="grid gap-6 md:gap-9">
             <ProductDescription desc={product?.description ?? ""} />
@@ -56,8 +49,8 @@ const DetailProducts = () => {
           </div>
         </div>
         <RelatedProduct
-          studyField={product?.studyField ?? ""}
-          currentId={product?.id ?? 0}
+          studyField={product?.studyfield ?? ""}
+          currentId={product?.productid ?? 0}
         />
       </div>
     </MainLayout>
