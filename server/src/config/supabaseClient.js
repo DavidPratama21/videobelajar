@@ -11,7 +11,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 let pool;
 if (process.env.NODE_ENV === "production") {
   pool = new Pool({
-    connectionString: process.env.APP_SUPABASE_URL,
+    // connectionString: process.env.APP_SUPABASE_URL,
+    connectionString: process.env.SUPABASE_DB_URL,
     ssl: { rejectUnauthorized: false },
   });
 } else {
