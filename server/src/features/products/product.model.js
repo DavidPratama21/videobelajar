@@ -1,106 +1,136 @@
 import supabase from "../../config/supabaseClient.js";
 import { pool } from "../../config/supabaseClient.js";
 
-export async function getProducts({ search, sort, minPrice, maxPrice, studyField }) {
-  let baseQuery = `
+export async function getProducts({
+  search,
+  sort,
+  minPrice,
+  maxPrice,
+  studyField,
+}) {
+  let query = `
     SELECT
-      p.id AS productid,
-      p.name AS productname,
+      p.id,
+      p.name,
       p.description,
       p.price,
       p.image,
       p.studyfield,
-      t.id AS tutorid,
-      t.name AS tutorname,
-      t.expertise AS tutorrole,
-      t.photo AS tutorphoto,
-      t.workplace AS tutorworkplace,
-      COALESCE(ROUND(AVG(r.rating),2),0) AS avgrating,
-      COALESCE(COUNT(r.id), 0) AS totalreviewers
+
+      COALESCE(ROUND((
+        SELECT AVG(r.rating) FROM rates r WHERE r.product_id = p.id
+      ), 2), 0) AS avgrating,
+
+      COALESCE((
+        SELECT COUNT(r.id) FROM rates r WHERE r.product_id = p.id
+      ), 0) AS totalreviews,
+
+      COALESCE(
+        (
+          SELECT json_agg(
+            DISTINCT jsonb_build_object(
+              'id', t.id,
+              'name', t.name,
+              'expertise', t.expertise,
+              'photo', t.photo,
+              'workplace', t.workplace
+            )
+          )
+          FROM product_tutor pt 
+          JOIN tutors t ON pt.tutor_id = t.id
+          WHERE pt.product_id = p.id
+        ), '[]'
+      ) AS tutors
     FROM products p
-    LEFT JOIN product_tutor pt ON p.id = pt.product_id
-    LEFT JOIN tutors t ON pt.tutor_id = t.id
-    LEFT JOIN rates r ON p.id = r.product_id
-    WHERE 1=1
   `;
 
   const params = [];
   let paramIndex = 1;
 
   if (search) {
-    baseQuery += ` AND (p.name ILIKE $${paramIndex} OR p.description ILIKE $${paramIndex})`;
+    query += ` AND (p.name ILIKE $${paramIndex} OR p.description ILIKE $${paramIndex})`;
     params.push(`%${search}%`);
     paramIndex++;
   }
 
   if (studyField) {
-    baseQuery += ` AND p.studyfield = $${paramIndex}`;
+    query += ` AND p.studyfield = $${paramIndex}`;
     params.push(studyField);
     paramIndex++;
   }
 
   if (minPrice) {
-    baseQuery += ` AND p.price >= $${paramIndex}`;
+    query += ` AND p.price >= $${paramIndex}`;
     params.push(minPrice);
     paramIndex++;
   }
 
   if (maxPrice) {
-    baseQuery += ` AND p.price <= $${paramIndex}`;
+    query += ` AND p.price <= $${paramIndex}`;
     params.push(maxPrice);
     paramIndex++;
   }
 
-  baseQuery += `
-    GROUP BY
-      p.id, p.name, p.description, p.price, p.image, p.studyfield,
-      t.id, t.name, t.expertise, t.photo, t.workplace
-  `;
-
   switch (sort) {
     case "name_asc":
-      baseQuery += ` ORDER BY p.name ASC`;
+      query += ` ORDER BY p.name ASC`;
       break;
     case "name_desc":
-      baseQuery += ` ORDER BY p.name DESC`;
+      query += ` ORDER BY p.name DESC`;
       break;
     case "price_asc":
-      baseQuery += ` ORDER BY p.price ASC`;
+      query += ` ORDER BY p.price ASC`;
       break;
     case "price_desc":
-      baseQuery += ` ORDER BY p.price DESC`;
+      query += ` ORDER BY p.price DESC`;
       break;
   }
 
-  const { rows } = await pool.query(baseQuery, params);
+  const { rows } = await pool.query(query, params);
+  console.log(rows);
   return rows;
 }
 
 export async function getProduct(id) {
-  const { data, error } = await supabase
-    // .from("products")
-    // .select(
-    //   `
-    //   id, name, description, price, image, studyfield,
-    //   tutors (id, name, expertise, photo, workplace),
-    //   rates (rating)
-    // `
-    // )
-    // .eq("id", id)
-    .from("product_with_tutor_reviews")
-    .select("*")
-    .eq("productid", id)
-    .single();
+  const query = `
+    SELECT
+      p.id,
+      p.name,
+      p.description,
+      p.price,
+      p.image,
+      p.studyfield,
 
-  if (error) throw new Error(error.message);
-  return data
-  // return {
-  //   ...data,
-  //   avgRating: data.rates?.length
-  //     ? data.rates.reduce((a, r) => a + r.rating, 0) / data.rates.length
-  //     : 0,
-  //   totalReviewers: data.rates?.length || 0,
-  // };
+      COALESCE(ROUND((
+        SELECT AVG(r.rating) FROM rates r WHERE r.product_id = p.id
+      ), 2), 0) AS avgrating,
+
+      COALESCE((
+        SELECT COUNT(r.id) FROM rates r WHERE r.product_id = p.id
+      ), 0) AS totalreviews,
+
+      COALESCE(
+        (
+          SELECT json_agg(
+            DISTINCT jsonb_build_object(
+              'id', t.id,
+              'name', t.name,
+              'expertise', t.expertise,
+              'photo', t.photo,
+              'workplace', t.workplace
+            )
+          )
+          FROM product_tutor pt 
+          JOIN tutors t ON pt.tutor_id = t.id
+          WHERE pt.product_id = p.id
+        ), '[]'
+      ) AS tutors
+    FROM products p
+    WHERE p.id = $1
+  `;
+
+  const result = await pool.query(query, [id]);
+  return result.rows[0];
 }
 
 export async function createProduct({

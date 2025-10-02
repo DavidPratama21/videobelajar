@@ -1,16 +1,28 @@
 import { createClient } from "@supabase/supabase-js";
 import pkg from "pg";
 import dotenv from "dotenv";
+dotenv.config();
 const { Pool } = pkg;
 
-export const pool = new Pool({
-  connectionString: process.env.APP_SUPABASE_URL,
-  ssl:{rejectUnauthorized: false}
-})
-
-dotenv.config();
 const supabaseUrl = process.env.APP_SUPABASE_URL;
 const supabaseKey = process.env.APP_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+let pool;
+if (process.env.NODE_ENV === "production") {
+  pool = new Pool({
+    connectionString: process.env.APP_SUPABASE_URL,
+    ssl: { rejectUnauthorized: false },
+  });
+} else {
+  pool = new Pool({
+    host: process.env.DBPOST_HOST,
+    port: process.env.DBPOST_PORT,
+    user: process.env.DBPOST_USER,
+    password: process.env.DBPOST_PASSWORD,
+    database: process.env.DBPOST_NAME,
+  });
+}
+
+export { pool };
 export default supabase;
