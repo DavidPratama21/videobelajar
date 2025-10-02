@@ -8,20 +8,22 @@ import emailRoutes from "./features/emails/email.routes.js";
 dotenv.config();
 const app = express();
 
-// app.use(
-//   cors({
-//     origin: [process.env.DEPLOY_URL, process.env.LOCAL_URL],
-//     credentials: true,
-//   })
-// );
 app.use(
   cors({
-    origin: "*", // sementara untuk test
+    origin: [process.env.DEPLOY_URL, process.env.LOCAL_URL],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin: "*", // sementara untuk test
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 
