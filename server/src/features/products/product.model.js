@@ -41,7 +41,7 @@ export async function getProducts({
           WHERE pt.product_id = p.id
         ), '[]'
       ) AS tutors
-    FROM products p
+    FROM products p WHERE 1=1
   `;
 
   const params = [];
