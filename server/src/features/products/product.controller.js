@@ -5,6 +5,7 @@ export async function getAllProducts(req, res) {
     const products = await ProductModel.getProducts(req.query);
     res.json(products);
   } catch (err) {
+    console.error("Err di getAllProducts: ", err);
     res.status(500).json({ message: err.message });
   }
 }

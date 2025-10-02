@@ -86,7 +86,10 @@ export async function getProducts({
       break;
   }
 
-  const { rows } = await pool.query(query, params);
+  const { rows } = await pool.query(query, params).catch((e) => {
+    console.error("Error DB:", e);
+    throw e;
+  });
   console.log(rows);
   return rows;
 }
