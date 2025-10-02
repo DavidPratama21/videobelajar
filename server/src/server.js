@@ -3,13 +3,17 @@ import dotenv from "dotenv";
 import cors from "cors";
 import productRoutes from "./features/products/product.routes.js";
 import userRoutes from "./features/users/users.routes.js";
-import emailRoutes from "./features/emails/email.routes.js"; 
-
+import emailRoutes from "./features/emails/email.routes.js";
 
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: [process.env.DEPLOY_URL, process.env.CLIENT_URL,], credentials: true }));
+app.use(
+  cors({
+    origin: [process.env.DEPLOY_URL, process.env.LOCAL_URL],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
